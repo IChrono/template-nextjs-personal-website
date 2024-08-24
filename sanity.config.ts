@@ -19,6 +19,7 @@ import milestone from '@/sanity/schemas/objects/milestone'
 import timeline from '@/sanity/schemas/objects/timeline'
 import home from '@/sanity/schemas/singletons/home'
 import settings from '@/sanity/schemas/singletons/settings'
+import { hostileWord } from './sanity/schemas/documents/word'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE ||
@@ -39,6 +40,7 @@ export default defineConfig({
       duration,
       page,
       project,
+      hostileWord,
       // Objects
       milestone,
       timeline,
