@@ -1,36 +1,54 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { resolveHref } from '@/sanity/lib/utils'
 import type { MenuItem, SettingsPayload } from '@/types'
 
-interface NavbarProps {
-  data: SettingsPayload
-}
-export default function Navbar(props: NavbarProps) {
-  const { data } = props
-  const menuItems = data?.menuItems || ([] as MenuItem[])
+export default function Navbar() {
   return (
-    <div className="sticky top-0 z-10 flex flex-wrap items-center gap-x-5 bg-white/80 px-4 py-4 backdrop-blur md:px-16 md:py-5 lg:px-32">
-      {menuItems &&
-        menuItems.map((menuItem, key) => {
-          const href = resolveHref(menuItem?._type, menuItem?.slug)
-          if (!href) {
-            return null
-          }
-          return (
-            <Link
-              key={key}
-              className={`text-lg hover:text-black md:text-xl ${
-                menuItem?._type === 'home'
-                  ? 'font-extrabold text-black'
-                  : 'text-gray-600'
-              }`}
-              href={href}
-            >
-              {menuItem.title}
-            </Link>
-          )
-        })}
-    </div>
+    <nav className="flex justify-between px-[14px] py-[16px] bg-[#272559] md:px-[80px] ">
+      <div className="flex gap-[32px]">
+        <Link href="/">
+          <Image
+            src="./Navbar/logo_nav.svg"
+            width={89}
+            height={30}
+            alt="Logo dubby nav"
+            className="md:w-[120px] h-[48px]"
+          />
+        </Link>
+        <Image
+          src="./Navbar/logo_nav_search.svg"
+          width={32}
+          height={32}
+          alt="Logo dubby nav"
+          className="hidden md:w-[32px] h-[32px]"
+        />
+      </div>
+      <Image
+        src="./Navbar/logo_nav_search.svg"
+        width={32}
+        height={32}
+        alt="Logo dubby nav"
+        className="md:w-[48px] h-[48px]"
+      />
+
+      <div className="flex gap-[32px]">
+        <Image
+          src="./Navbar/darkmode_nav.svg"
+          width={89}
+          height={30}
+          alt="Logo dubby nav"
+          className="hidden md:block w-[143px] h-[48px] "
+        />
+        <Image
+          src="./Navbar/menu_nav.svg"
+          width={32}
+          height={32}
+          alt="Logo dubby nav"
+          className="md:w-[48px] h-[48px]"
+        />
+      </div>
+    </nav>
   )
 }

@@ -5,6 +5,8 @@ import { draftMode } from 'next/headers'
 
 import { client } from '@/sanity/lib/client'
 import {
+  getHostileWords,
+  getWord,
   homePageQuery,
   pagesBySlugQuery,
   projectBySlugQuery,
@@ -13,9 +15,11 @@ import {
 import { token } from '@/sanity/lib/token'
 import {
   HomePagePayload,
+  HostileWords,
   PagePayload,
   ProjectPayload,
   SettingsPayload,
+  WordPayload,
 } from '@/types'
 
 const serverClient = client.withConfig({
@@ -91,5 +95,22 @@ export function loadPage(slug: string) {
     pagesBySlugQuery,
     { slug },
     { next: { tags: [`page:${slug}`] } },
+  )
+}
+
+export function loadHostileWords(params: string) {
+  console.log('data dentro loadquery ' + params)
+  return loadQuery<HostileWords | null>(
+    getHostileWords,
+    { params },
+    { next: { tags: ['home', 'hostile-words'] } },
+  )
+}
+
+export function loadWord(slug: string) {
+  return loadQuery<WordPayload | null>(
+    getWord,
+    { slug },
+    { next: { tags: [`hostile-words:${slug}`] } },
   )
 }

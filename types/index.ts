@@ -64,3 +64,15 @@ export interface SettingsPayload {
   menuItems?: MenuItem[]
   ogImage?: Image
 }
+
+export interface HostileWords {
+  title: string
+  currentSlug: string
+}
+
+export interface WordPayload {
+  title: string
+  category: string
+  level: number
+  definition: string
+}

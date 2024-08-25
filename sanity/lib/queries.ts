@@ -52,3 +52,15 @@ export const settingsQuery = groq`
     ogImage,
   }
 `
+
+export const getHostileWords = groq`*[_type == "hostileWord" && title match ("*" + $params + "*")]{
+  title,
+  "currentSlug": slug.current
+}`
+
+export const getWord = groq`*[_type == "hostileWord" && slug.current == $slug][0]{
+  title,
+  category,
+  level,
+  definition
+}`
