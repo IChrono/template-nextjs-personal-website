@@ -9,7 +9,7 @@ export default async function WordPage({ params }: params) {
   const { data } = await loadWord(slug)
   console.log(data)
   return (
-    <div className="w-full flex flex-col items-center mt-36 mx-20">
+    <div className="w-full flex flex-col items-center mt-36">
       <main className="md:max-w-[100%]">
         <h1 className="text-6xl font-extrabold">{data?.title}</h1>
         <section className="w-full px-20 mt-16 flex justify-between gap-72">
@@ -21,7 +21,7 @@ export default async function WordPage({ params }: params) {
           </div>
           <div className="mr-10">
             <h3 className="text-4xl mb-3 font-bold">Definizione</h3>
-            <p className="text-xl max-w-[900px]">{data?.definition}</p>
+            <p className="text-xl max-w-[700px]">{data?.definition}</p>
           </div>
         </section>
       </main>
@@ -36,23 +36,21 @@ function Level({ wordLevel }: { wordLevel: number }) {
     'Da usare con attenzione',
     'Ostile',
   ]
+  console.log('wordlevel ' + wordLevel)
   for (let i = 0; i < levelsString.length; i++) {
     levels.push(
       <div key={i} className="flex items-center gap-2 py-1 ">
         <div
-          className={clsx(
-            'w-5 h-5 min-w-5 border-2 bg-gray-700  rounded-full',
-            {
-              'bg-[#79BF21] ': i === 0,
-              'bg-[#F2AD00]': i === 1,
-              'bg-[#A81640]': i === 2,
-              'border-2 border-black': wordLevel === i + 1,
-              'border-2 border-transparent': wordLevel !== i + 1,
-            },
-          )}
+          className={clsx('w-5 h-5 border-2 min-w-5 rounded-full', {
+            'bg-[#79BF21]': i === 0,
+            'bg-[#F2AD00]': i === 1,
+            'bg-[#A81640]': i === 2,
+            'border-2 border-black': wordLevel === i + 1,
+            'border-2 border-transparent': wordLevel !== i + 1,
+          })}
         ></div>
         <p
-          className={clsx('text-[#B2B2B2] text-3xl ', {
+          className={clsx('text-[#B2B2B2] min text-3xl', {
             'text-[#79BF21] font-bold': wordLevel === i + 1 && i === 0,
             'text-[#F2AD00] font-bold': wordLevel === i + 1 && i === 1,
             'text-[#A81640] font-bold': wordLevel === i + 1 && i === 2,
