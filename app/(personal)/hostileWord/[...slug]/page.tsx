@@ -39,7 +39,7 @@ function Level({ wordLevel }: { wordLevel: number }) {
   console.log('wordlevel ' + wordLevel)
   for (let i = 0; i < levelsString.length; i++) {
     levels.push(
-      <div key={i} className="flex items-center gap-2 py-1 ">
+      <div key={wordLevel} className="flex items-center gap-2 py-1 ">
         <div
           className={clsx('w-5 h-5 border-2 min-w-5 rounded-full', {
             'bg-[#79BF21]': i === 0,
@@ -50,10 +50,11 @@ function Level({ wordLevel }: { wordLevel: number }) {
           })}
         ></div>
         <p
-          className={clsx('text-[#B2B2B2] min text-3xl', {
+          className={clsx('min text-3xl', {
             'text-[#79BF21] font-bold': wordLevel === i + 1 && i === 0,
             'text-[#F2AD00] font-bold': wordLevel === i + 1 && i === 1,
             'text-[#A81640] font-bold': wordLevel === i + 1 && i === 2,
+            'text-[#B2B2B2]': wordLevel !== i + 1,
           })}
           key={i}
         >
