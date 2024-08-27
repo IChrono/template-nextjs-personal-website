@@ -98,11 +98,11 @@ export function loadPage(slug: string) {
   )
 }
 
-export function loadHostileWords(params: string) {
-  console.log('data dentro loadquery ' + params)
+export function loadHostileWords(searchParams: string) {
+  
   return loadQuery<HostileWords | null>(
     getHostileWords,
-    { params },
+    { searchParams },
     { next: { tags: ['home', 'hostile-words'] } },
   )
 }

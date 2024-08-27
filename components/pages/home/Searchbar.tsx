@@ -15,9 +15,7 @@ export default function SearchBar({ placeholder }: { placeholder: string }) {
     } else {
       params.delete('query')
     }
-    // const scrollPos = window.scrollY;
     replace(`${pathname}?${params.toString()}`, {scroll:false})
-    // scrollTo(0,scrollPos)
   }
 
   return (

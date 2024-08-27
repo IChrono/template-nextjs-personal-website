@@ -12,6 +12,7 @@ const HomePagePreview = dynamic(
 
 interface SearchParams {
   query?: string
+  cat?: string
   page?: string
 }
 
@@ -19,13 +20,13 @@ export default async function IndexRoute({
   searchParams,
 }: { searchParams?: SearchParams } = {}) {
   const initial = await loadHomePage()
-
-  console.log('Questi sono i query params ' + searchParams?.query)
-  const query = searchParams?.query
+  const query = searchParams?.query || '';
+  const catQuery = searchParams?.cat?.split(" ").map(item => item.trim())  // Rimuove eventuali spazi bianchi extra
+  .filter(item => item.length > 0) || []
+  console.log(catQuery)
   let words
   try {
-    words = await loadHostileWords(query || '')
-    console.log(words)
+    words = await loadHostileWords(query) 
   } catch (error) {
     console.error('Failed to load hostile words:', error)
     words = { data: null }
