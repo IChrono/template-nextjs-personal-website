@@ -29,7 +29,7 @@ export default function SearchBar({ placeholder }: { placeholder: string }) {
       <input
         className="bg-transparent focus:outline-none placeholder:text-white"
         placeholder={placeholder}
-        onChange={(e) => {e.preventDefault(); handleSearch(e.target.value)}}
+        onChange={(e) => {handleSearch(e.target.value)}}
         defaultValue={searchParams.get('query')?.toString()}
       />
     </div>
