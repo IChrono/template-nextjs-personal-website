@@ -15,7 +15,9 @@ export default function SearchBar({ placeholder }: { placeholder: string }) {
     } else {
       params.delete('query')
     }
-    replace(`${pathname}?${params.toString()}`)
+    // const scrollPos = window.scrollY;
+    replace(`${pathname}?${params.toString()}`, {scroll:false})
+    // scrollTo(0,scrollPos)
   }
 
   return (
@@ -27,7 +29,7 @@ export default function SearchBar({ placeholder }: { placeholder: string }) {
       <input
         className="bg-transparent focus:outline-none placeholder:text-white"
         placeholder={placeholder}
-        onChange={(e) => handleSearch(e.target.value)}
+        onChange={(e) => {e.preventDefault(); handleSearch(e.target.value)}}
         defaultValue={searchParams.get('query')?.toString()}
       />
     </div>

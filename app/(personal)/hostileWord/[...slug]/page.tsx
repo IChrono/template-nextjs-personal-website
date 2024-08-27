@@ -9,19 +9,19 @@ export default async function WordPage({ params }: params) {
   const { data } = await loadWord(slug)
   console.log(data)
   return (
-    <div className="w-full flex flex-col items-center mt-36">
+    <div className="w-full flex flex-col items-center mt-36 px-20">
       <main className="md:max-w-[100%]">
         <h1 className="text-6xl font-extrabold">{data?.title}</h1>
-        <section className="w-full px-20 mt-16 flex justify-between gap-72">
+        <section className="w-full mt-16 flex justify-between gap-72">
           <div className="ml-10">
             <h3 className="text-3xl font-bold text-[#B2B2B2] mb-3">
               Categoria: {data?.category}
             </h3>
             <Level wordLevel={data?.level ?? 4} />
           </div>
-          <div className="mr-10">
+          <div>
             <h3 className="text-4xl mb-3 font-bold">Definizione</h3>
-            <p className="text-xl max-w-[700px]">{data?.definition}</p>
+            <p className="text-xl max-w-[800px]">{data?.definition}</p>
           </div>
         </section>
       </main>
