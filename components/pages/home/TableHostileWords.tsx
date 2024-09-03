@@ -1,4 +1,3 @@
-
 // import { getWords } from "@/utils/sanityFetch";
 import { loadHostileWords } from '@/sanity/loader/loadQuery'
 import Link from 'next/link'
@@ -6,10 +5,12 @@ import Categories from './Category'
 
 type TableHostileWordsProps = {
   words: string[]
+  fetchedCat: string[]
 }
 
 export default async function TableHostileWords({
   words,
+  fetchedCat,
 }: TableHostileWordsProps) {
   return (
     <main className="w-full flex justify-center">
@@ -19,10 +20,10 @@ export default async function TableHostileWords({
             Filtro per una o più categorie
           </h3>
           {/* filtro per categoria */}
-          <Categories />
+          <Categories fetchedCat={fetchedCat} />
         </div>
 
-        <div className="w-full flex flex-col items-center px-10">
+        <div className="w-full flex flex-col items-center px-10 pb-8">
           <div className="h-40"></div>
           <ul className="flex flex-col  ">
             {words?.map((word: any) => (
@@ -42,4 +43,3 @@ export default async function TableHostileWords({
   // top 10
   // Ordinamento da a-z
 }
-

@@ -5,7 +5,9 @@ import { draftMode } from 'next/headers'
 
 import { client } from '@/sanity/lib/client'
 import {
+  getCategories,
   getHostileWords,
+  getHostileWordsWithCategories,
   getWord,
   homePageQuery,
   pagesBySlugQuery,
@@ -14,6 +16,7 @@ import {
 } from '@/sanity/lib/queries'
 import { token } from '@/sanity/lib/token'
 import {
+  Categories,
   HomePagePayload,
   HostileWords,
   PagePayload,
@@ -99,11 +102,29 @@ export function loadPage(slug: string) {
 }
 
 export function loadHostileWords(searchParams: string) {
-  
   return loadQuery<HostileWords | null>(
     getHostileWords,
     { searchParams },
     { next: { tags: ['home', 'hostile-words'] } },
+  )
+}
+
+export function loadHostileWordsWithCategories(
+  searchParams: string,
+  categoryParams: string[],
+) {
+  return loadQuery<HostileWords | null>(
+    getHostileWordsWithCategories,
+    { searchParams, categoryParams },
+    { next: { tags: ['home', 'hostile-words'] } },
+  )
+}
+
+export function loadCategory() {
+  return loadQuery<Categories | null>(
+    getCategories,
+    {},
+    { next: { tags: ['category'] } },
   )
 }
 

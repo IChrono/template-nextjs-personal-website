@@ -70,6 +70,14 @@ export interface HostileWords {
   currentSlug: string
 }
 
+export interface Category {
+  category: string
+}
+
+export interface Categories {
+  categories: Category[]
+}
+
 export interface WordPayload {
   title: string
   category: string

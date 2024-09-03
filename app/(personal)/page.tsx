@@ -3,8 +3,15 @@ import { draftMode } from 'next/headers'
 import Link from 'next/link'
 
 import { studioUrl } from '@/sanity/lib/api'
-import { loadHomePage, loadHostileWords } from '@/sanity/loader/loadQuery'
+import {
+  loadCategory,
+  loadHomePage,
+  loadHostileWords,
+  loadHostileWordsWithCategories,
+} from '@/sanity/loader/loadQuery'
 import HomePage from '@/components/pages/home/HomePage'
+import { Category } from '@/types'
+import Categories from '@/components/pages/home/Category'
 
 const HomePagePreview = dynamic(
   () => import('@/components/pages/home/HomePagePreview'),
@@ -19,14 +26,36 @@ interface SearchParams {
 export default async function IndexRoute({
   searchParams,
 }: { searchParams?: SearchParams } = {}) {
-  const initial = await loadHomePage()
-  const query = searchParams?.query || '';
-  const catQuery = searchParams?.cat?.split(" ").map(item => item.trim())  // Rimuove eventuali spazi bianchi extra
-  .filter(item => item.length > 0) || []
-  console.log(catQuery)
   let words
+  let fetchedCat
+  let categories: string[]
+  let uniqueCat
+
+  const initial = await loadHomePage()
+
+  const query = searchParams?.query || ''
+
+  const catQuery =
+    searchParams?.cat
+      ?.split(' ')
+      .map((item) => item.trim()) // Rimuove eventuali spazi bianchi extra
+      .filter((item) => item.length > 0) || []
+
   try {
-    words = await loadHostileWords(query) 
+    fetchedCat = await loadCategory()
+  } catch (error) {
+    console.error('Failed to load Categories: ', error)
+    fetchedCat = { data: null }
+  }
+
+  categories = fetchedCat.data.map((item: Category) => item.category)
+  uniqueCat = [...new Set(categories)]
+
+  try {
+    words =
+      catQuery.length > 0
+        ? await loadHostileWordsWithCategories(query, catQuery)
+        : await loadHostileWords(query)
   } catch (error) {
     console.error('Failed to load hostile words:', error)
     words = { data: null }
@@ -47,5 +76,7 @@ export default async function IndexRoute({
     )
   }
 
-  return <HomePage data={initial.data} words={words?.data} />
+  return (
+    <HomePage data={initial.data} words={words?.data} fetchedCat={uniqueCat} />
+  )
 }

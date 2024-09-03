@@ -1,5 +1,3 @@
-
-
 import type { EncodeDataAttributeCallback } from '@sanity/react-loader'
 
 import { Header } from '@/components/shared/Header'
@@ -13,8 +11,14 @@ export interface HomePageProps {
   data: HomePagePayload | null
   encodeDataAttribute?: EncodeDataAttributeCallback
   words: string[]
+  fetchedCat: string[]
 }
-export function HomePage({ data, encodeDataAttribute, words }: HomePageProps) {
+export function HomePage({
+  data,
+  encodeDataAttribute,
+  words,
+  fetchedCat,
+}: HomePageProps) {
   // Default to an empty object to allow previews on non-existent documents
   const { overview = [], showcaseProjects = [], title = '' } = data ?? {}
 
@@ -23,7 +27,7 @@ export function HomePage({ data, encodeDataAttribute, words }: HomePageProps) {
       {/* Header */}
       {title && <Header centered title={title} description={overview} />}
       <SearchBar placeholder=" Cerca..." />
-      <TableHostileWords words={words} />
+      <TableHostileWords words={words} fetchedCat={fetchedCat} />
     </div>
   )
 }

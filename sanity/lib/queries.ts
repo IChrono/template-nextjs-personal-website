@@ -58,23 +58,16 @@ export const getHostileWords = groq`*[_type == "hostileWord" && title match ("*"
   "currentSlug": slug.current
 }`
 
-// export const getHostileWords = groq`
-//   *[_type == "hostileWord"
-//     && (
-//       !defined($searchParams) 
-//       || $searchParams == "" 
-//       || lower(title) match ("*" + lower($searchParams) + "*")
-//     )
-//     && (
-//       !defined($categoryParams) 
-//       || $categoryParams == [] 
-//       || count(categories[lower(category) in $categoryParams[]]) > 0
-//     )
-//   ]{
-//     title,
-//     "currentSlug": slug.current
-//   }
-// `
+export const getHostileWordsWithCategories = groq`*[_type == "hostileWord" 
+  && title match ("*" + $searchParams + "*") 
+  && category in $categoryParams]
+  {
+    title,
+    "currentSlug": slug.current
+  }`
+
+export const getCategories = groq`*[_type == "hostileWord"] { category }`
+
 export const getWord = groq`*[_type == "hostileWord" && slug.current == $slug][0]{
   title,
   category,
