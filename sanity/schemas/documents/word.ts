@@ -1,4 +1,4 @@
-import {defineType, defineField} from 'sanity'
+import { defineType, defineField } from 'sanity'
 
 export const hostileWord = defineType({
   name: 'hostileWord',
@@ -23,12 +23,15 @@ export const hostileWord = defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'LGBTQIA+', value: 'lgbtqia'},
-          {title: 'Multiculturalità', value: 'multiculturalità'},
-          {title: 'Salute', value: 'salute'},
-          {title: 'Genere', value: 'genere'},
-          {title: 'Età', value: 'età'},
-          {title: 'Generale', value: 'generale'},
+          { title: 'LGBTQIA+', value: 'lgbtqia' },
+          { title: 'Multiculturalità', value: 'multiculturalità' },
+          { title: 'Salute', value: 'salute' },
+          { title: 'Genere', value: 'genere' },
+          { title: 'Età', value: 'età' },
+          { title: 'Generale', value: 'generale' },
+          { title: 'Migrazione', value: 'migrazione' },
+          { title: 'Razzismo', value: 'razzismo' },
+          { title: 'Disabilità', value: 'disabilità' },
         ],
       },
     }),
@@ -38,9 +41,9 @@ export const hostileWord = defineType({
       type: 'number',
       options: {
         list: [
-          {title: 'Livello 1', value: 1},
-          {title: 'Livello 2', value: 2},
-          {title: 'Livello 3', value: 3},
+          { title: 'Livello 1', value: 1 },
+          { title: 'Livello 2', value: 2 },
+          { title: 'Livello 3', value: 3 },
         ],
       },
     }),
@@ -54,7 +57,7 @@ export const hostileWord = defineType({
       name: 'relatedTerms',
       title: 'Related Terms',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'reference', to: [{ type: 'hostileWord' }] }],
       description: 'Related terms',
     }),
     defineField({

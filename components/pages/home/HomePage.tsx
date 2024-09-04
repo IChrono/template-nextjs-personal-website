@@ -23,12 +23,12 @@ export function HomePage({
   const { overview = [], showcaseProjects = [], title = '' } = data ?? {}
 
   return (
-    <div className="space-y-20">
+    <>
       {/* Header */}
       {title && <Header centered title={title} description={overview} />}
       <SearchBar placeholder=" Cerca..." />
       <TableHostileWords words={words} fetchedCat={fetchedCat} />
-    </div>
+    </>
   )
 }
 

@@ -42,11 +42,11 @@ export default function Categories({ fetchedCat }: CategoriesProp) {
   }
 
   return (
-    <div className="w-full bg-[#EDEDED] p-4 relative after:content-[''] after:absolute after:top-[50px] after:right-[-40px] after:border-t-[20px] after:border-t-transparent after:border-b-[20px] after:border-b-transparent after:border-r-[25px] after:border-r-white">
-      <ul className="pt-2">
+    <div className="w-full bg-[#EDEDED] p-2 relative after:content-[''] after:absolute after:top-[50px] after:right-[-40px] after:border-t-[20px] after:border-t-transparent after:border-b-[20px] after:border-b-transparent after:border-r-[25px] after:border-r-white">
+      <ul className="pt-2 flex flex-wrap gap-2">
         {fetchedCat?.map((cat: string) => (
           <li key={cat} className="my-1 flex items-center">
-            <div className="flex items-center bg-white p-2 rounded-[6px]">
+            <div className="flex items-center bg-white p-2 rounded-[6px] border-[3px] border-[#9940F8]">
               <input
                 type="checkbox"
                 id={`${cat}`}

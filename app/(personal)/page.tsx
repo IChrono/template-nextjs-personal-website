@@ -52,10 +52,13 @@ export default async function IndexRoute({
   uniqueCat = [...new Set(categories)]
 
   try {
-    words =
-      catQuery.length > 0
-        ? await loadHostileWordsWithCategories(query, catQuery)
-        : await loadHostileWords(query)
+    if (catQuery.length > 0) {
+      words = await loadHostileWordsWithCategories(query, catQuery)
+    } else if (query !== '') {
+      words = await loadHostileWords(query)
+    } else {
+      words = ''
+    }
   } catch (error) {
     console.error('Failed to load hostile words:', error)
     words = { data: null }
