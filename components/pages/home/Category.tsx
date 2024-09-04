@@ -14,6 +14,18 @@ export default function Categories({ fetchedCat }: CategoriesProp) {
   const params = new URLSearchParams(searchParams)
   const [categories, setCategories] = useState<string[]>([])
 
+  useEffect(() => {
+    const catParams =
+      searchParams
+        .get('cat')
+        ?.split(' ')
+        .map((item) => item.trim()) // Rimuove eventuali spazi bianchi extra
+        .filter((item) => item.length > 0) || []
+
+    console.log(catParams)
+    setCategories(catParams)
+  }, [])
+
   function handleSetCategory(e) {
     const { value, checked } = e.target
     const newValues = checked
