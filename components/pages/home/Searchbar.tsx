@@ -15,19 +15,21 @@ export default function SearchBar({ placeholder }: { placeholder: string }) {
     } else {
       params.delete('query')
     }
-    replace(`${pathname}?${params.toString()}`, {scroll:false})
+    replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
   return (
-    <div className="text-white flex justify-center bg-search-gradient w-full text-[24px] md:text-[40px]">
+    <div className="flex w-full justify-center bg-search-gradient text-[24px] text-white md:text-[40px]">
       <label htmlFor="search " className="">
         {' '}
         |
       </label>
       <input
-        className="bg-transparent focus:outline-none placeholder:text-white"
+        className="bg-transparent placeholder:text-white focus:outline-none"
         placeholder={placeholder}
-        onChange={(e) => {handleSearch(e.target.value)}}
+        onChange={(e) => {
+          handleSearch(e.target.value)
+        }}
         defaultValue={searchParams.get('query')?.toString()}
       />
     </div>

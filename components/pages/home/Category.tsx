@@ -42,18 +42,18 @@ export default function Categories({ fetchedCat }: CategoriesProp) {
   }
 
   return (
-    <div className="w-full bg-[#EDEDED] p-2 relative after:content-[''] after:absolute after:top-[50px] after:right-[-40px] after:border-t-[20px] after:border-t-transparent after:border-b-[20px] after:border-b-transparent after:border-r-[25px] after:border-r-white">
-      <ul className="pt-2 flex flex-wrap gap-2">
+    <div className="relative w-full bg-blue-200 p-2">
+      <ul className="flex flex-wrap gap-2 pt-2">
         {fetchedCat?.map((cat: string) => (
           <li key={cat} className="my-1 flex items-center">
-            <div className="flex items-center bg-white p-2 rounded-[6px] border-[3px] border-[#9940F8]">
+            <div className="flex items-center rounded-[6px] border-[3px] border-[#9940F8] bg-white p-2">
               <input
                 type="checkbox"
                 id={`${cat}`}
                 name="category"
                 value={`${cat}`}
                 checked={categories.includes(cat)}
-                className="w-6 h-6 appearance-none rounded-full border-2 border-gray-300 checked:bg-[#9940F8] checked:border-transparent focus:outline-none"
+                className="h-6 w-6 appearance-none rounded-full border-2 border-gray-300 checked:border-transparent checked:bg-[#9940F8] focus:outline-none"
                 onChange={(e) => handleSetCategory(e)}
               />
               <label className="ml-3 text-xl" htmlFor={`${cat}`}>
