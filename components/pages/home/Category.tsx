@@ -5,9 +5,13 @@ import { useState, useEffect } from 'react'
 
 type CategoriesProp = {
   fetchedCat: string[]
+  commaFilter: string
 }
 
-export default function Categories({ fetchedCat }: CategoriesProp) {
+export default function Categories({
+  fetchedCat,
+  commaFilter,
+}: CategoriesProp) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
@@ -45,17 +49,17 @@ export default function Categories({ fetchedCat }: CategoriesProp) {
       <ul className="flex flex-wrap gap-2 pt-2">
         {fetchedCat?.map((cat: string) => (
           <li key={cat} className="my-1 flex items-center">
-            <div className="flex items-center rounded-[6px] border-[3px] border-[#9940F8] bg-white p-2">
+            <div className="flex items-center rounded-[6px] border-[2px] border-black bg-white p-2">
               <input
                 type="checkbox"
                 id={`${cat}`}
                 name="category"
                 value={`${cat}`}
                 checked={categories.includes(cat)}
-                className="h-6 w-6 appearance-none rounded-full border-2 border-gray-300 checked:border-transparent checked:bg-[#9940F8] focus:outline-none"
+                className={`h-6 w-6 appearance-none rounded-full border-2 border-gray-300 checked:border-black ${commaFilter === 'az' ? 'checked:bg-[#9940F8]' : 'checked:bg-[#F534D0]'} focus:outline-none`}
                 onChange={(e) => handleSetCategory(e)}
               />
-              <label className="ml-3 text-xl" htmlFor={`${cat}`}>
+              <label className="text-l ml-3 md:text-xl" htmlFor={`${cat}`}>
                 {cat}
               </label>
             </div>

@@ -21,7 +21,7 @@ export default function TableHostileWords({
   const [commaFilter, setCommaFilter] = useState('')
 
   return (
-    <main className="flex w-full justify-center">
+    <main className="max-fit flex w-full justify-center">
       {/* <Image
           className="relative"
           src="a-z-filter.svg"
@@ -30,35 +30,35 @@ export default function TableHostileWords({
           height={238}
         ></Image> */}
 
-      <div className="relative z-10 mb-20 mt-40 flex max-h-[500px] max-w-[800px] rounded-[50px] shadow-2xl shadow-gray-400 md:min-h-[500px] md:min-w-[900px]">
+      <div className="relative z-10 mb-32 mt-40 flex max-h-[100px] max-w-[800px] flex-col rounded-[50px] shadow-2xl shadow-gray-400 sm:max-h-[500px] lg:min-h-[500px] lg:min-w-[900px] lg:flex-row">
         <CommaFilter
           commaFilter={commaFilter}
           setCommaFilter={setCommaFilter}
         />
         <div
           className={clsx(
-            'z-20 w-full rounded-l-[50px] border-[5px] border-r-0 bg-blue-200 p-10',
+            'z-20 w-full bg-blue-200 p-10 lg:rounded-l-[50px] lg:border-[5px] lg:border-b-[5px] lg:border-r-0',
             { 'border-[#9940F8]': commaFilter === 'az' },
             { 'border-[#F534D0]': commaFilter === 'moreSeen' },
           )}
         >
-          <h3 className="text-[24px] font-medium">
-            Filtro per una o più categorie
+          <h3 className="pt-12 text-[18px] font-medium md:text-[20px] lg:text-[24px]">
+            Filtro per una
+            <br className="sm:hidden" /> o più categorie
           </h3>
           {/* filtro per categoria */}
-          <Categories fetchedCat={fetchedCat} />
+          <Categories fetchedCat={fetchedCat} commaFilter={commaFilter} />
         </div>
-        <div className="absolute left-[430px] top-[100px] z-20 h-0 w-0 border-b-[60px] border-r-[60px] border-t-[60px] border-b-transparent border-r-white border-t-transparent"></div>
+        <div className="absolute left-[430px] top-[100px] z-20 hidden h-0 w-0 border-b-[60px] border-r-[60px] border-t-[60px] border-b-transparent border-r-white border-t-transparent lg:block"></div>
 
         <div
           className={clsx(
-            'z-20 flex w-full flex-col items-center rounded-r-[50px] border-[5px] border-l-0 bg-white px-10 pb-8',
+            'z-20 flex h-[300px] w-full flex-col items-center rounded-r-[50px] bg-white px-10 py-10 pb-8 md:h-full lg:border-[5px] lg:border-l-0',
             { 'border-[#9940F8]': commaFilter === 'az' },
             { 'border-[#F534D0]': commaFilter === 'moreSeen' },
           )}
         >
-          <div className="h-40"></div>
-          <ul className="flex max-h-full flex-col overflow-auto">
+          <ul className="flex flex-col overflow-auto sm:max-h-full lg:mt-32">
             {words?.map((word: any) => (
               <Link
                 key={word.currentSlug}

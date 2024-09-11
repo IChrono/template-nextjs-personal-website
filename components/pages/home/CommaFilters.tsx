@@ -32,7 +32,7 @@ export default function CommaFilters({
 
   return (
     <>
-      <div className="absolute left-[470px] top-[-100px]">
+      <div className="absolute right-12 top-[-100px]">
         <div
           onClick={() => {
             params.delete('commaFilter')
@@ -49,7 +49,7 @@ export default function CommaFilters({
           <AzCommaFilter commaFilter={commaFilter} />
         </div>
       </div>
-      <div className="absolute left-[570px] top-[-100px]">
+      <div className="absolute right-36 top-[-100px]">
         <div
           onClick={() => {
             params.delete('commaFilter')

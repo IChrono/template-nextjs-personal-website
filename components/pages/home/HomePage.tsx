@@ -26,7 +26,7 @@ export function HomePage({
     <>
       {/* Header */}
       {title && <Header centered title={title} description={overview} />}
-      <SearchBar placeholder=" Cerca..." />
+      <SearchBar placeholder="| Cerca..." />
       <TableHostileWords words={words} fetchedCat={fetchedCat} />
     </>
   )

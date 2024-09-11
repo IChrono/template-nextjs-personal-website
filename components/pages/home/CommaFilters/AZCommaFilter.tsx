@@ -3,6 +3,7 @@ type AzCommaFilterProp = { commaFilter: string }
 export default function AzCommaFilter({ commaFilter }: AzCommaFilterProp) {
   return (
     <svg
+      className="w-[90px] sm:w-28"
       width="123"
       height="238"
       viewBox="24 24 123 238"
