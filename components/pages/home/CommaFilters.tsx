@@ -5,16 +5,31 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import AzCommaFilter from './CommaFilters/AZCommaFilter'
 import clsx from 'clsx'
 import MoreSeen from './CommaFilters/MoreSeen'
-export default function CommaFilters() {
+
+type CommaFiltersProps = {
+  commaFilter: string
+  setCommaFilter: (filter: string) => void
+}
+
+export default function CommaFilters({
+  commaFilter,
+  setCommaFilter,
+}: CommaFiltersProps) {
   const urlParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
   const params = new URLSearchParams(urlParams)
-  const [commaFilter, setCommaFilter] = useState('az') // Imposta lo stato iniziale a 'false'
+
   useEffect(() => {
-    const initialCatParam = params.get('commaFilter')
-    setCommaFilter(initialCatParam)
+    const initialCatParams = params.get('commaFilter')
+    if (initialCatParams === null) {
+      params.set('commaFilter', 'az')
+    }
+    setCommaFilter(params?.get('commaFilter') || 'az')
+
+    router.replace(`${pathname}?${params}`, { scroll: false })
   }, [])
+
   return (
     <>
       <div className="absolute left-[470px] top-[-100px]">

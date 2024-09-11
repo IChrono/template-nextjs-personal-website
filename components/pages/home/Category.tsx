@@ -22,7 +22,6 @@ export default function Categories({ fetchedCat }: CategoriesProp) {
         .map((item) => item.trim()) // Rimuove eventuali spazi bianchi extra
         .filter((item) => item.length > 0) || []
 
-    console.log(catParams)
     setCategories(catParams)
   }, [])
 
